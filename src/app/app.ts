@@ -1,12 +1,31 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import {
+  FooterComponent,
+  NavbarComponent,
+  PageHeroComponent,
+  PlaceCardComponent,
+  RevealComponent,
+  SectionHeadingComponent,
+} from './components/site';
+import { images, places } from './lib/panhala-data';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    NavbarComponent,
+    FooterComponent,
+    PageHeroComponent,
+    PlaceCardComponent,
+    RevealComponent,
+    SectionHeadingComponent,
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('panhala-vibes');
+  readonly images = images;
+  readonly featuredPlaces = places.slice(0, 3);
 }
