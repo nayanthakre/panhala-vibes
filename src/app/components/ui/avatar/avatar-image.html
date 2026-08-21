@@ -1,0 +1,8 @@
+@if (!failed()) {
+  <img
+    [src]="src()"
+    [alt]="alt()"
+    [class]="classes()"
+    (error)="failed.set(true)"
+  />
+}

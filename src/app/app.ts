@@ -1,31 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import {
-  FooterComponent,
-  NavbarComponent,
-  PageHeroComponent,
-  PlaceCardComponent,
-  RevealComponent,
-  SectionHeadingComponent,
-} from './components/site';
-import { images, places } from './lib/panhala-data';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    NavbarComponent,
-    FooterComponent,
-    PageHeroComponent,
-    PlaceCardComponent,
-    RevealComponent,
-    SectionHeadingComponent,
-  ],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  imports: [RouterOutlet],
+  template: `<router-outlet />`,
+  styles: `:host { display: block; }`,
 })
-export class App {
-  readonly images = images;
-  readonly featuredPlaces = places.slice(0, 3);
-}
+export class App {}

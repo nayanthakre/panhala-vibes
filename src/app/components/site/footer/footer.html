@@ -1,0 +1,51 @@
+<footer class="bg-forest-gradient text-cream">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:py-16">
+    <div class="min-w-0">
+      <div class="flex items-center gap-2">
+        <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-gradient text-lg">
+          🏰
+        </span>
+        <span class="text-display text-xl">Panhala Explorer</span>
+      </div>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-sand/85">
+        Discover the history, nature and soul of Panhala.
+      </p>
+      <p class="mt-6 text-sm font-semibold text-gold-soft">📍 Panhala, Maharashtra, India</p>
+      <div class="mt-4 flex gap-2">
+        @for (s of socials; track s) {
+          <a
+            href="#"
+            [attr.aria-label]="s"
+            class="grid h-10 w-10 place-items-center rounded-xl border border-cream/25 text-xs font-bold transition-colors hover:bg-cream/15"
+          >
+            {{ s[0] }}
+          </a>
+        }
+      </div>
+    </div>
+
+    @for (col of columns; track col.title) {
+      <div>
+        <h3 class="eyebrow text-gold-soft">{{ col.title }}</h3>
+        <ul class="mt-4 grid gap-2.5">
+          @for (i of col.items; track i.label) {
+            <li>
+              <a
+                [routerLink]="i.to"
+                class="text-sm text-sand/85 transition-colors hover:text-cream"
+              >
+                {{ i.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  <div class="border-t border-cream/15">
+    <p class="container-page py-5 text-xs text-sand/70">
+      © {{ year }} Panhala Explorer — a digital guide to the fort, its hills and its people.
+    </p>
+  </div>
+</footer>

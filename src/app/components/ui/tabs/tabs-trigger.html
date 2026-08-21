@@ -1,0 +1,11 @@
+<button
+  type="button"
+  role="tab"
+  [attr.aria-selected]="active()"
+  [attr.data-state]="active() ? 'active' : 'inactive'"
+  [disabled]="disabled()"
+  [class]="classes()"
+  (click)="activate()"
+>
+  <ng-content />
+</button>

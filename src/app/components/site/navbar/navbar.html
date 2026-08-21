@@ -1,0 +1,74 @@
+<header [class]="headerClass()">
+  <nav class="container-page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3 lg:py-4">
+    <a
+      routerLink="/"
+      class="flex min-w-0 items-center gap-2"
+      (click)="open.set(false)"
+    >
+      <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-forest-gradient text-lg">
+        🏰
+      </span>
+      <span class="text-display truncate text-lg text-foreground sm:text-xl">
+        Panhala Explorer
+      </span>
+    </a>
+
+    <div class="flex items-center gap-2">
+      <ul class="hidden items-center gap-1 xl:flex">
+        @for (l of links; track l.to + l.label) {
+          <li>
+            <a
+              [routerLink]="l.to"
+              routerLinkActive="text-foreground bg-secondary"
+              [routerLinkActiveOptions]="{ exact: l.to === '/' }"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              {{ l.label }}
+            </a>
+          </li>
+        }
+      </ul>
+
+      <a routerLink="/plan" class="btn-base btn-primary hidden shrink-0 sm:inline-flex">
+        Plan My Visit <span class="arrow">→</span>
+      </a>
+
+      <button
+        type="button"
+        class="btn-base btn-outline shrink-0 px-3 xl:hidden"
+        [attr.aria-expanded]="open()"
+        aria-label="Toggle navigation menu"
+        (click)="open.update((v) => !v)"
+      >
+        {{ open() ? '✕' : '☰' }}
+      </button>
+    </div>
+  </nav>
+
+  @if (open()) {
+    <div class="border-t border-border bg-background/95 backdrop-blur-md xl:hidden">
+      <ul class="container-page grid gap-1 py-4">
+        @for (l of links; track 'm' + l.to + l.label) {
+          <li>
+            <a
+              [routerLink]="l.to"
+              class="block rounded-xl px-4 py-3 text-base font-semibold text-foreground transition-colors hover:bg-secondary"
+              (click)="open.set(false)"
+            >
+              {{ l.label }}
+            </a>
+          </li>
+        }
+        <li class="pt-2">
+          <a
+            routerLink="/plan"
+            class="btn-base btn-gold w-full"
+            (click)="open.set(false)"
+          >
+            ✨ Plan My Panhala Day
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
+</header>

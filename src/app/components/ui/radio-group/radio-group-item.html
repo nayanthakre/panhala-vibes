@@ -1,0 +1,12 @@
+<button
+  type="button"
+  role="radio"
+  [attr.aria-checked]="checked()"
+  [disabled]="disabled()"
+  [class]="classes()"
+  (click)="activate()"
+>
+  @if (checked()) {
+    <span class="h-2 w-2 rounded-full bg-primary"></span>
+  }
+</button>

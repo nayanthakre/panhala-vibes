@@ -1,0 +1,16 @@
+<div [class]="gridClasses()">
+  <div class="min-w-0 max-w-2xl">
+    @if (eyebrow()) {
+      <p [class]="tone() === 'dark' ? 'eyebrow text-gold-soft' : 'eyebrow'">
+        {{ eyebrow() }}
+      </p>
+    }
+    <h2 [class]="titleClasses()">{{ title() }}</h2>
+    @if (subtitle()) {
+      <p [class]="subtitleClasses()">{{ subtitle() }}</p>
+    }
+  </div>
+  <div class="shrink-0">
+    <ng-content />
+  </div>
+</div>

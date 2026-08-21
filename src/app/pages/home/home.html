@@ -1,0 +1,531 @@
+﻿<main>
+  <!-- HERO -->
+  <section class="relative isolate min-h-[92svh] overflow-hidden">
+    <img
+      [src]="images.heroPanhala"
+      alt="Panhala Fort ramparts above the misty Sahyadri hills at sunrise"
+      width="1920"
+      height="1088"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="image-overlay absolute inset-0"></div>
+
+    @for (c of heroChips; track c.label) {
+      <div
+        [style.animation-delay]="c.delay"
+        class="float-chip absolute hidden items-center gap-2 rounded-full border border-cream/25 bg-forest-deep/35 px-4 py-2 text-sm font-semibold text-cream backdrop-blur-md lg:flex"
+        [ngClass]="c.pos"
+      >
+        <span aria-hidden="true">{{ c.icon }}</span>
+        {{ c.label }}
+      </div>
+    }
+
+    <div class="container-page relative flex min-h-[92svh] flex-col justify-center py-24">
+      <app-reveal class="max-w-3xl">
+        <span class="badge-heritage bg-forest-deep/40 text-gold-soft">Kolhapur • Maharashtra</span>
+        <h1 class="text-display mt-6 text-4xl text-cream sm:text-6xl lg:text-7xl">
+          Panhala Explorer
+        </h1>
+        <p class="text-display mt-4 text-xl text-gold-soft sm:text-2xl lg:text-3xl">
+          Where History Meets the Sahyadris
+        </p>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-sand/90 sm:text-lg">
+          Explore ancient forts, hidden places, local food, nature trails and the stories of
+          Panhala.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a routerLink="/explore" class="btn-base btn-gold">
+            Explore Panhala <span class="arrow">→</span>
+          </a>
+          <a routerLink="/plan" class="btn-base btn-ghost-light">Plan My Visit</a>
+        </div>
+      </app-reveal>
+    </div>
+  </section>
+
+  <!-- FLOATING EXPLORE BAR -->
+  <section class="container-page relative z-10 -mt-14">
+    <app-reveal>
+      <div
+        class="surface-card grid gap-5 p-6 sm:p-7 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center"
+      >
+        <div class="min-w-0">
+          <p class="eyebrow">Start here</p>
+          <h2 class="text-display mt-2 text-2xl">What are you looking for?</h2>
+        </div>
+        <div class="flex flex-wrap gap-2.5 lg:justify-end">
+          @for (f of exploreFilters; track f.label) {
+            <a [routerLink]="f.to" class="btn-base btn-outline">
+              <span aria-hidden="true">{{ f.icon }}</span> {{ f.label }}
+            </a>
+          }
+        </div>
+      </div>
+    </app-reveal>
+  </section>
+
+  <!-- EXPLORE PANHALA -->
+  <section class="container-page py-20 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Explore"
+        title="Explore Panhala"
+        subtitle="Discover more than just the fort."
+      >
+        <a routerLink="/explore" class="btn-base btn-outline">
+          View all places <span class="arrow">→</span>
+        </a>
+      </app-section-heading>
+    </app-reveal>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (p of places; track p.slug; let i = $index) {
+        <app-reveal [delay]="i * 60">
+          <app-place-card [place]="p" />
+        </app-reveal>
+      }
+    </div>
+  </section>
+
+  <!-- PLAN YOUR DAY -->
+  <section class="bg-sand-gradient py-20 sm:py-24">
+    <div class="container-page">
+      <app-reveal>
+        <app-section-heading
+          align="center"
+          eyebrow="Itinerary"
+          title="Plan Your Panhala Day"
+          subtitle="Not sure where to start? Let us plan your day."
+        />
+      </app-reveal>
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        @for (block of timeline; track block.part; let bi = $index) {
+          <app-reveal [delay]="bi * 90">
+            <div class="surface-card h-full p-6">
+              <h3 class="text-display text-xl">{{ block.part }}</h3>
+              <ol class="mt-5 grid gap-5">
+                @for (item of block.items; track item.time) {
+                  <li class="relative grid grid-cols-[auto_minmax(0,1fr)] gap-4">
+                    <div class="flex flex-col items-center">
+                      <span class="mt-1.5 h-3 w-3 shrink-0 rounded-full bg-gold-gradient"></span>
+                      <span class="mt-1 w-px flex-1 bg-border"></span>
+                    </div>
+                    <div class="min-w-0 pb-1">
+                      <p class="text-xs font-bold tracking-widest text-muted-foreground">
+                        {{ item.time }}
+                      </p>
+                      <p class="text-display mt-1 text-lg">{{ item.title }}</p>
+                      <p class="mt-1 text-sm text-muted-foreground">{{ item.note }}</p>
+                    </div>
+                  </li>
+                }
+              </ol>
+            </div>
+          </app-reveal>
+        }
+      </div>
+      <app-reveal class="mt-10 flex justify-center">
+        <a routerLink="/plan" class="btn-base btn-gold">✨ Create My Plan</a>
+      </app-reveal>
+    </div>
+  </section>
+
+  <!-- NATURE -->
+  <section class="container-page py-20 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Nature"
+        title="Experience Panhala's Nature"
+        subtitle="Walk through the green side of history."
+      />
+    </app-reveal>
+    <div class="mt-10 grid gap-6">
+      @for (n of natureSpots; track n.tag; let i = $index) {
+        <app-reveal [delay]="i * 80">
+          <article class="group relative isolate overflow-hidden rounded-3xl">
+            <img
+              [src]="n.image"
+              [alt]="n.title"
+              loading="lazy"
+              width="1600"
+              height="900"
+              class="zoom-img h-[300px] w-full object-cover sm:h-[380px]"
+            />
+            <div class="image-overlay absolute inset-0"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+              <p class="eyebrow text-gold-soft">{{ n.tag }}</p>
+              <h3 class="text-display mt-2 max-w-lg text-2xl text-cream sm:text-3xl">
+                {{ n.title }}
+              </h3>
+              <p class="mt-2 max-w-md text-sm text-sand/90 sm:text-base">{{ n.copy }}</p>
+              <a routerLink="/explore" class="btn-base btn-ghost-light mt-5">
+                Explore Trail <span class="arrow">→</span>
+              </a>
+            </div>
+          </article>
+        </app-reveal>
+      }
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="bg-forest-gradient py-20 text-cream sm:py-24">
+    <div class="container-page">
+      <app-reveal>
+        <app-section-heading
+          tone="dark"
+          eyebrow="Since 1178"
+          title="Stories Behind the Stones"
+          subtitle="Eight centuries of rulers, sieges and monsoons — written into the walls."
+        >
+          <a routerLink="/history" class="btn-base btn-ghost-light">
+            Discover Panhala's History <span class="arrow">→</span>
+          </a>
+        </app-section-heading>
+      </app-reveal>
+
+      <div class="mt-12 overflow-x-auto pb-4">
+        <ol class="flex min-w-max gap-6 border-t border-cream/20 pt-8">
+          @for (h of history; track h.year; let i = $index) {
+            <li class="relative w-[248px] shrink-0">
+              <span
+                class="absolute -top-[2.6rem] left-0 h-3 w-3 rounded-full bg-gold-gradient"
+                [style.animation-delay]="i * 100 + 'ms'"
+              ></span>
+              <p class="text-display text-2xl text-gold-soft">{{ h.year }}</p>
+              <h3 class="text-display mt-2 text-lg text-cream">{{ h.title }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-sand/80">{{ h.copy }}</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section class="container-page py-20 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Exhibition"
+        title="People Who Shaped Panhala"
+        subtitle="The rulers, commanders and reformers whose decisions still echo on this plateau."
+      />
+    </app-reveal>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      @for (p of people; track p.name; let i = $index) {
+        <app-reveal [delay]="i * 70">
+          <article
+            class="surface-card surface-card-hover grid h-full grid-cols-[auto_minmax(0,1fr)] gap-5 p-6"
+          >
+            <div
+              class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-forest-gradient text-2xl text-cream sm:h-20 sm:w-20"
+            >
+              {{ initial(p.name) }}
+            </div>
+            <div class="min-w-0">
+              <h3 class="text-display text-lg sm:text-xl">{{ p.name }}</h3>
+              <p class="mt-1 text-xs font-bold uppercase tracking-widest text-terracotta">
+                {{ p.role }}
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{{ p.copy }}</p>
+            </div>
+          </article>
+        </app-reveal>
+      }
+    </div>
+  </section>
+
+  <!-- LOCAL CULTURE -->
+  <section class="bg-sand-gradient py-20 sm:py-24">
+    <div class="container-page">
+      <app-reveal>
+        <app-section-heading
+          eyebrow="Culture"
+          title="Discover Local Panhala"
+          subtitle="Discover the Panhala that most visitors miss."
+        />
+      </app-reveal>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        @for (c of culture; track c.title; let i = $index) {
+          <app-reveal [delay]="i * 50">
+            <a
+              routerLink="/local"
+              class="surface-card surface-card-hover flex h-full items-start gap-4 p-5"
+            >
+              <span
+                class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary text-lg"
+              >
+                {{ c.icon }}
+              </span>
+              <span class="min-w-0">
+                <span class="text-display block text-lg">{{ c.title }}</span>
+                <span class="mt-1 block text-sm text-muted-foreground">{{ c.copy }}</span>
+              </span>
+            </a>
+          </app-reveal>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section class="container-page py-20 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Food"
+        title="Taste Panhala"
+        subtitle="Fiery Kolhapuri spice, bhakri off the griddle and chai with a valley view."
+      >
+        <a routerLink="/food" class="btn-base btn-outline">
+          All food places <span class="arrow">→</span>
+        </a>
+      </app-section-heading>
+    </app-reveal>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (f of foods; track f.name; let i = $index) {
+        <app-reveal [delay]="i * 70">
+          <article class="surface-card surface-card-hover group flex h-full flex-col">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img
+                [src]="f.image"
+                [alt]="f.dish + ' at ' + f.name"
+                loading="lazy"
+                width="1024"
+                height="768"
+                class="zoom-img h-full w-full object-cover"
+              />
+              <span class="badge-heritage absolute left-4 top-4">{{ f.cuisine }}</span>
+            </div>
+            <div class="flex flex-1 flex-col gap-2 p-5">
+              <h3 class="text-display text-xl">{{ f.name }}</h3>
+              <p class="text-sm text-muted-foreground">Known for {{ f.dish }}</p>
+              <div
+                class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border pt-4 text-xs font-semibold text-muted-foreground"
+              >
+                <span>⭐ {{ f.rating }}</span>
+                <span>{{ f.price }}</span>
+                <span>📍 {{ f.distance }}</span>
+              </div>
+              <a routerLink="/food" class="btn-base btn-outline">
+                View Place <span class="arrow">→</span>
+              </a>
+            </div>
+          </article>
+        </app-reveal>
+      }
+    </div>
+  </section>
+
+  <!-- STAY -->
+  <section class="container-page pb-20 sm:pb-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Stay"
+        title="Stay Around Panhala"
+        subtitle="Hilltop homestays and heritage retreats, minutes from the ramparts."
+      >
+        <a routerLink="/stay" class="btn-base btn-outline">
+          All stays <span class="arrow">→</span>
+        </a>
+      </app-section-heading>
+    </app-reveal>
+    <div class="mt-10 grid gap-6">
+      @for (s of stays; track s.name; let i = $index) {
+        <app-reveal [delay]="i * 70">
+          <article class="surface-card surface-card-hover group grid md:grid-cols-[320px_minmax(0,1fr)]">
+            <div class="relative aspect-[4/3] overflow-hidden md:aspect-auto">
+              <img
+                [src]="s.image"
+                [alt]="s.name"
+                loading="lazy"
+                width="1024"
+                height="768"
+                class="zoom-img h-full w-full object-cover"
+              />
+            </div>
+            <div class="grid gap-3 p-6">
+              <div class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+                <div class="min-w-0">
+                  <h3 class="text-display text-xl">{{ s.name }}</h3>
+                  <p class="mt-1 text-sm text-muted-foreground">📍 {{ s.location }}</p>
+                </div>
+                <span class="badge-heritage shrink-0">⭐ {{ s.rating }}</span>
+              </div>
+              <p class="text-display text-lg text-forest">
+                {{ s.price }}<span class="text-sm text-muted-foreground"> / night</span>
+              </p>
+              <p class="text-sm text-muted-foreground">{{ s.distance }}</p>
+              <ul class="flex flex-wrap gap-2">
+                @for (a of s.amenities; track a) {
+                  <li
+                    class="rounded-lg bg-secondary px-3 py-1.5 text-xs font-semibold text-secondary-foreground"
+                  >
+                    {{ a }}
+                  </li>
+                }
+              </ul>
+              <a
+                routerLink="/stay"
+                class="btn-base btn-outline w-full sm:w-auto sm:justify-self-start"
+              >
+                View Stay <span class="arrow">→</span>
+              </a>
+            </div>
+          </article>
+        </app-reveal>
+      }
+    </div>
+  </section>
+
+  <!-- LOCAL SHOPS -->
+  <section class="bg-sand-gradient py-20 sm:py-24">
+    <div class="container-page grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+      <app-reveal>
+        <app-section-heading
+          eyebrow="Marketplace"
+          title="Take a Piece of Panhala Home"
+          subtitle="Old bookshops, hand-turned wood, jaggery and crafts made a few hills away."
+        />
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          @for (s of shops; track s.title) {
+            <div class="surface-card surface-card-hover flex gap-3 p-4">
+              <span class="text-lg" aria-hidden="true">{{ s.icon }}</span>
+              <span class="min-w-0">
+                <span class="block font-bold">{{ s.title }}</span>
+                <span class="mt-0.5 block text-sm text-muted-foreground">{{ s.copy }}</span>
+              </span>
+            </div>
+          }
+        </div>
+        <a routerLink="/local" class="btn-base btn-primary mt-8">
+          Browse local shops <span class="arrow">→</span>
+        </a>
+      </app-reveal>
+      <app-reveal [delay]="120">
+        <img
+          [src]="images.localMarket"
+          alt="Local Panhala market stall with wooden crafts and traditional products"
+          loading="lazy"
+          width="1024"
+          height="768"
+          class="h-full w-full rounded-3xl object-cover shadow-[var(--shadow-lift)]"
+        />
+      </app-reveal>
+    </div>
+  </section>
+
+  <!-- MAP / DISTANCE -->
+  <section class="container-page py-20 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="Nearby"
+        title="How Far Is Everything?"
+        subtitle="Distances measured from Panhala bus stand — most of the fort is walkable."
+      />
+    </app-reveal>
+    <div class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <app-reveal>
+        <div class="surface-card p-6 sm:p-8">
+          <div class="grid gap-4">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-xl bg-secondary">📍</span>
+              <div class="min-w-0">
+                <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  Current location
+                </p>
+                <p class="truncate font-semibold">Panhala Bus Stand</p>
+              </div>
+            </div>
+            <div class="ml-5 h-8 w-px bg-border"></div>
+            <div class="flex items-center gap-3">
+              <span
+                class="grid h-10 w-10 place-items-center rounded-xl bg-forest-gradient text-cream"
+              >
+                🏰
+              </span>
+              <div class="min-w-0">
+                <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                  Destination
+                </p>
+                <p class="truncate font-semibold">Panhala Fort</p>
+              </div>
+            </div>
+          </div>
+          <dl class="mt-8 grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-secondary p-4">
+              <dt class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                Distance
+              </dt>
+              <dd class="text-display mt-1 text-2xl">2.4 km</dd>
+            </div>
+            <div class="rounded-2xl bg-secondary p-4">
+              <dt class="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                Est. travel
+              </dt>
+              <dd class="text-display mt-1 text-2xl">8 min</dd>
+            </div>
+          </dl>
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=Panhala+Fort,+Kolhapur"
+            target="_blank"
+            rel="noreferrer noopener"
+            class="btn-base btn-primary mt-6 w-full"
+          >
+            Get Directions <span class="arrow">→</span>
+          </a>
+        </div>
+      </app-reveal>
+      <app-reveal [delay]="100">
+        <div class="surface-card h-full p-6 sm:p-8">
+          <h3 class="text-display text-xl">Nearby places</h3>
+          <ul class="mt-5 grid gap-3">
+            @for (p of nearbyPlaces; track p.slug) {
+              <li
+                class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border px-4 py-3"
+              >
+                <div class="min-w-0">
+                  <p class="truncate font-semibold">{{ p.name }}</p>
+                  <p class="text-xs text-muted-foreground">{{ p.category }}</p>
+                </div>
+                <span class="shrink-0 text-sm font-bold text-forest">{{ p.distance }}</span>
+              </li>
+            }
+          </ul>
+          <a routerLink="/map" class="btn-base btn-outline mt-6 w-full">
+            Open map view <span class="arrow">→</span>
+          </a>
+        </div>
+      </app-reveal>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="container-page pb-24">
+    <app-reveal>
+      <div class="relative isolate overflow-hidden rounded-3xl">
+        <img
+          [src]="images.sunsetPoint"
+          alt="Sunset over the Sahyadri ridges from Panhala"
+          loading="lazy"
+          width="1600"
+          height="900"
+          class="h-[360px] w-full object-cover sm:h-[420px]"
+        />
+        <div class="image-overlay absolute inset-0"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+          <p class="eyebrow text-gold-soft">Your journey</p>
+          <h2 class="text-display mt-3 max-w-2xl text-3xl text-cream sm:text-5xl">
+            Your Panhala adventure starts here
+          </h2>
+          <p class="mt-4 max-w-lg text-sand/90">
+            Build a day plan around the fort, the food and the hills — in a few taps.
+          </p>
+          <div class="mt-7 flex flex-wrap justify-center gap-3">
+            <a routerLink="/plan" class="btn-base btn-gold">✨ Plan My Panhala Day</a>
+            <a routerLink="/explore" class="btn-base btn-ghost-light">View Details</a>
+          </div>
+        </div>
+      </div>
+    </app-reveal>
+  </section>
+</main>

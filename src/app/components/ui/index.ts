@@ -1,5 +1,5 @@
-export { ButtonComponent, buttonVariants } from './button';
-export type { ButtonVariant, ButtonSize } from './button';
+export { ButtonComponent, buttonVariants } from './button/button';
+export type { ButtonVariant, ButtonSize } from './button/button';
 
 export {
   CardComponent,
@@ -8,41 +8,51 @@ export {
   CardDescriptionComponent,
   CardContentComponent,
   CardFooterComponent,
-} from './card';
+} from './card/public-api';
 
-export { BadgeComponent, badgeVariants } from './badge';
-export type { BadgeVariant } from './badge';
+export { BadgeComponent, badgeVariants } from './badge/badge';
+export type { BadgeVariant } from './badge/badge';
 
-export { InputComponent } from './input';
-export { TextareaComponent } from './textarea';
-export { LabelComponent } from './label';
-export { SeparatorComponent } from './separator';
-export { SkeletonComponent } from './skeleton';
+export { InputComponent } from './input/input';
+export { TextareaComponent } from './textarea/textarea';
+export { LabelComponent } from './label/label';
+export { SeparatorComponent } from './separator/separator';
+export { SkeletonComponent } from './skeleton/skeleton';
 
-export { AlertComponent, AlertTitleComponent, AlertDescriptionComponent, alertVariants } from './alert';
-export type { AlertVariant } from './alert';
+export {
+  AlertComponent,
+  AlertTitleComponent,
+  AlertDescriptionComponent,
+  alertVariants,
+} from './alert/public-api';
+export type { AlertVariant } from './alert/alert';
 
-export { AvatarComponent, AvatarImageComponent, AvatarFallbackComponent } from './avatar';
-export { ProgressComponent } from './progress';
-export { AspectRatioComponent } from './aspect-ratio';
-export { CheckboxComponent } from './checkbox';
-export { SwitchComponent } from './switch';
-export { ToggleComponent, toggleVariants } from './toggle';
-export type { ToggleVariant, ToggleSize } from './toggle';
+export {
+  AvatarComponent,
+  AvatarImageComponent,
+  AvatarFallbackComponent,
+} from './avatar/public-api';
+
+export { ProgressComponent } from './progress/progress';
+export { AspectRatioComponent } from './aspect-ratio/aspect-ratio';
+export { CheckboxComponent } from './checkbox/checkbox';
+export { SwitchComponent } from './switch/switch';
+export { ToggleComponent, toggleVariants } from './toggle/toggle';
+export type { ToggleVariant, ToggleSize } from './toggle/toggle';
 
 export {
   TabsComponent,
   TabsListComponent,
   TabsTriggerComponent,
   TabsContentComponent,
-} from './tabs';
+} from './tabs/public-api';
 
 export {
   AccordionComponent,
   AccordionItemComponent,
   AccordionTriggerComponent,
   AccordionContentComponent,
-} from './accordion';
+} from './accordion/public-api';
 
 export {
   DialogComponent,
@@ -50,14 +60,14 @@ export {
   DialogFooterComponent,
   DialogTitleComponent,
   DialogDescriptionComponent,
-} from './dialog';
+} from './dialog/public-api';
 
 export {
   SheetComponent,
   SheetHeaderComponent,
   SheetTitleComponent,
   SheetDescriptionComponent,
-} from './sheet';
+} from './sheet/public-api';
 
 export {
   BreadcrumbComponent,
@@ -66,9 +76,9 @@ export {
   BreadcrumbLinkComponent,
   BreadcrumbPageComponent,
   BreadcrumbSeparatorComponent,
-} from './breadcrumb';
+} from './breadcrumb/public-api';
 
-export { RadioGroupComponent, RadioGroupItemComponent } from './radio-group';
+export { RadioGroupComponent, RadioGroupItemComponent } from './radio-group/public-api';
 
 export {
   TableComponent,
@@ -78,12 +88,12 @@ export {
   TableRowComponent,
   TableHeadComponent,
   TableCellComponent,
-} from './table';
+} from './table/public-api';
 
-export { ScrollAreaComponent } from './scroll-area';
+export { ScrollAreaComponent } from './scroll-area/scroll-area';
 
 export {
   CollapsibleComponent,
   CollapsibleTriggerComponent,
   CollapsibleContentComponent,
-} from './collapsible';
+} from './collapsible/public-api';
