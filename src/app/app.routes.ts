@@ -8,7 +8,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Panhala Explorer — Where History Meets the Sahyadris',
+        title: 'Panhala Vibes  — Where History Meets the Sahyadris',
         loadComponent: () => import('./pages/home/home').then((m) => m.HomePage),
       },
       {
@@ -48,7 +48,7 @@ export const routes: Routes = [
       },
       {
         path: '**',
-        title: 'Page not found — Panhala Explorer',
+        title: 'Page not found — Panhala Vibes',
         loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFoundPage),
       },
     ],
