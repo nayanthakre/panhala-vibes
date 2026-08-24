@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   PageHeroComponent,
   RevealComponent,
   SectionHeadingComponent,
 } from '@/app/components/site';
-import { images, places } from '@/app/lib/panhala-data';
+import { images, type Place } from '@/app/lib/panhala-data';
+import { PlaceService } from '@/app/services/place.service';
 
 @Component({
   selector: 'app-map-page',
@@ -115,9 +116,22 @@ import { images, places } from '@/app/lib/panhala-data';
     </main>
   `,
 })
-export class MapPage {
+export class MapPage implements OnInit {
+  private readonly placeService = inject(PlaceService);
+
   readonly images = images;
-  readonly places = places;
+  places: Place[] = [];
+
+  ngOnInit(): void {
+    this.placeService.getPlaces().subscribe({
+      next: (places) => {
+        this.places = places;
+      },
+      error: (error) => {
+        console.error('Failed to load places', error);
+      },
+    });
+  }
 
   mapsUrl(name: string): string {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + ' Panhala')}`;
