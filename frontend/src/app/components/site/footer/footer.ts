@@ -28,7 +28,9 @@ const columns = [
   standalone: true,
   imports: [RouterLink],
   templateUrl: './footer.html',
-
+  host: {
+    class: 'block w-full',
+  },
 })
 export class FooterComponent {
   readonly columns = columns;

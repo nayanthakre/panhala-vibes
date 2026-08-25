@@ -5,7 +5,9 @@ import { cn } from '@/app/lib/utils';
   selector: 'app-section-heading',
   standalone: true,
   templateUrl: './section-heading.html',
-
+  host: {
+    class: 'block w-full',
+  },
 })
 export class SectionHeadingComponent {
   readonly eyebrow = input<string>();

@@ -4,7 +4,9 @@ import { Component, input } from '@angular/core';
   selector: 'app-page-hero',
   standalone: true,
   templateUrl: './page-hero.html',
-
+  host: {
+    class: 'block w-full',
+  },
 })
 export class PageHeroComponent {
   readonly eyebrow = input.required<string>();

@@ -1,5 +1,5 @@
-<article class="surface-card surface-card-hover group flex flex-col">
-  <div class="relative aspect-[4/3] overflow-hidden">
+<article class="surface-card surface-card-hover group flex h-full flex-col">
+  <div class="relative aspect-[4/3] w-full overflow-hidden bg-muted">
     <img
       [src]="place().image"
       [alt]="place().name + ', Panhala'"
@@ -9,17 +9,17 @@
       class="zoom-img h-full w-full object-cover"
     />
     <div class="image-overlay pointer-events-none absolute inset-0 opacity-70"></div>
-    <span class="badge-heritage absolute left-4 top-4 group-hover:bg-gold-gradient">
+    <span class="badge-heritage absolute left-3 top-3 sm:left-4 sm:top-4 group-hover:bg-gold-gradient">
       {{ place().category }}
     </span>
   </div>
 
-  <div class="flex flex-1 flex-col gap-3 p-5">
-    <h3 class="text-display text-xl text-foreground">{{ place().name }}</h3>
-    <p class="text-sm leading-relaxed text-muted-foreground">{{ place().description }}</p>
+  <div class="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+    <h3 class="text-display text-lg sm:text-xl text-foreground">{{ place().name }}</h3>
+    <p class="text-xs sm:text-sm leading-relaxed text-muted-foreground">{{ place().description }}</p>
 
     <div
-      class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border pt-4 text-xs font-semibold text-muted-foreground"
+      class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border pt-3 sm:pt-4 text-xs font-semibold text-muted-foreground"
     >
       <span>📍 {{ place().distance }}</span>
       <span>⏱ {{ place().duration }}</span>

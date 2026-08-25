@@ -59,23 +59,29 @@ import { images, natureSpots, places } from '@/app/lib/panhala-data';
               subtitle="Walk through the green side of history."
             />
           </app-reveal>
-          <div class="mt-10 grid gap-6">
+          <div class="mt-8 sm:mt-10 grid gap-6">
             @for (n of natureSpots; track n.tag; let i = $index) {
               <app-reveal [delay]="i * 70">
-                <article class="group relative isolate overflow-hidden rounded-3xl">
+                <article
+                  class="group relative isolate flex min-h-[340px] sm:min-h-[380px] flex-col justify-end overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-soft transition-all duration-300"
+                >
                   <img
-                    [src]="n.image"
+                    [src]="n.image || (n.images && n.images[0]) || images.natureTrail"
                     [alt]="n.title"
                     loading="lazy"
                     width="1600"
                     height="900"
-                    class="zoom-img h-[280px] w-full object-cover sm:h-[360px]"
+                    class="zoom-img absolute inset-0 -z-20 h-full w-full object-cover"
                   />
-                  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest-deep/90 via-forest-deep/55 to-transparent"></div>
-                  <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+                  <div class="image-overlay absolute inset-0 -z-10"></div>
+                  <div class="relative z-10 flex flex-col items-start">
                     <p class="eyebrow text-gold-soft">{{ n.tag }}</p>
-                    <h3 class="text-display mt-2 text-2xl text-cream sm:text-3xl">{{ n.title }}</h3>
-                    <p class="mt-2 max-w-md text-sm text-sand/90">{{ n.copy }}</p>
+                    <h3 class="text-display mt-2 max-w-xl text-2xl text-cream sm:text-3xl">
+                      {{ n.title }}
+                    </h3>
+                    <p class="mt-2 max-w-lg text-sm text-sand/90 sm:text-base leading-relaxed">
+                      {{ n.copy }}
+                    </p>
                   </div>
                 </article>
               </app-reveal>

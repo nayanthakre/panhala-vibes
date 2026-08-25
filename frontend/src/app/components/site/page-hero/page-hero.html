@@ -4,18 +4,18 @@
     [alt]="alt()"
     width="1600"
     height="900"
-    class="absolute inset-0 h-full w-full object-cover"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
   />
-  <div class="image-overlay absolute inset-0"></div>
-  <div class="container-page relative py-24 sm:py-28">
-    <p class="eyebrow text-sm text-gold-soft">{{ eyebrow() }}</p>
-    <h1 class="text-display mt-3 max-w-3xl text-4xl text-cream sm:text-5xl lg:text-6xl">
+  <div class="image-overlay absolute inset-0 -z-10"></div>
+  <div class="container-page relative py-20 sm:py-28">
+    <p class="eyebrow text-xs sm:text-sm text-gold-soft">{{ eyebrow() }}</p>
+    <h1 class="text-display mt-3 max-w-3xl text-3xl sm:text-5xl lg:text-6xl text-cream">
       {{ title() }}
     </h1>
-    <p class="mt-4 max-w-xl text-base leading-relaxed text-sand/90 sm:text-lg">
+    <p class="mt-3 sm:mt-4 max-w-xl text-sm sm:text-base lg:text-lg leading-relaxed text-sand/90">
       {{ subtitle() }}
     </p>
-    <div class="mt-8 flex flex-wrap gap-3">
+    <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
       <ng-content />
     </div>
   </div>

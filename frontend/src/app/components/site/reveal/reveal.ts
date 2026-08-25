@@ -42,14 +42,14 @@ export class RevealComponent implements OnDestroy {
             this.observer?.disconnect();
           }
         },
-        { rootMargin: '0px 0px -10% 0px', threshold: 0.08 },
+        { rootMargin: '0px 0px 40px 0px', threshold: 0.01 },
       );
       this.observer.observe(el);
     });
   }
 
   hostClass(): string {
-    return cn('reveal', this.shown() ? 'reveal-in' : '', this.className());
+    return cn('reveal block w-full', this.shown() ? 'reveal-in' : '', this.className());
   }
 
   ngOnDestroy(): void {

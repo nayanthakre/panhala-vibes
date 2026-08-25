@@ -7,7 +7,9 @@ import type { Place } from '@/app/lib/panhala-data';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './place-card.html',
-
+  host: {
+    class: 'block h-full w-full',
+  },
 })
 export class PlaceCardComponent {
   readonly place = input.required<Place>();

@@ -9,6 +9,9 @@ export const images = {
   foodThali: '/assets/food-thali.jpg',
   localMarket: '/assets/local-market.jpg',
   stayHeritage: '/assets/stay-heritage.jpg',
+  panhalaFog1: '/assets/panhala-fog-1.jpg',
+  panhalaFog2: '/assets/panhala-fog-2.jpg',
+  panhalaFog3: '/assets/panhala-fog-3.jpg',
 } as const;
 
 export type Place = {
@@ -110,15 +113,24 @@ export const places: Place[] = [
   },
 ];
 
-export const natureSpots = [
+export type NatureSpot = {
+  tag: string;
+  title: string;
+  copy: string;
+  image: string;
+  images?: readonly string[];
+};
+
+export const natureSpots: NatureSpot[] = [
   {
     tag: '🌿 Monsoon Trails',
     title: 'Walk through the mist',
     copy: 'Green hills, ancient paths and clouds at eye level.',
+    image: images.panhalaFog1,
     images: [
-      '/assets/panhala-fog-1.jpg',
-      '/assets/panhala-fog-2.jpg',
-      '/assets/panhala-fog-3.jpg',
+      images.panhalaFog1,
+      images.panhalaFog2,
+      images.panhalaFog3,
     ],
   },
   {
@@ -126,12 +138,14 @@ export const natureSpots = [
     title: 'Light on the ridges',
     copy: 'Wide western views that turn gold in the last hour.',
     image: images.sunsetPoint,
+    images: [images.sunsetPoint],
   },
   {
     tag: '🏞️ Viewpoints & Hill Walks',
     title: 'The green side of history',
     copy: 'Easy walks along the ramparts with valley panoramas.',
     image: images.heroPanhala,
+    images: [images.heroPanhala, images.natureTrail],
   },
 ];
 

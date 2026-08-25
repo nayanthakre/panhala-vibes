@@ -20,7 +20,9 @@ const links = [
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
-
+  host: {
+    class: 'block w-full',
+  },
 })
 export class NavbarComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
