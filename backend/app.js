@@ -1,25 +1,31 @@
+// 1. Load installed packages using CommonJS (require)
 const express = require('express');
-const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const cors = require('cors');
-const connectDB = require('./config/db');
-const placeRoutes = require('./routes/placeRoutes');
+const dotenv = require('dotenv');
 
+// 2. Load environment variables from the .env file into process.env
 dotenv.config();
 
-// 1. Connect MongoDB Atlas
-connectDB();
-
+// 3. Initialize the Express application instance
 const app = express();
 
-// 2. Middlewares
-app.use(cors());
-app.use(express.json());
+// 4. Global Middleware Setup
+app.use(cors());         // Enables Cross-Origin Resource Sharing (allows frontend to fetch from backend)
+app.use(express.json()); // Parses incoming JSON request bodies (e.g., req.body in POST requests)
 
-// 3. Register Places Routes
-app.use('/api/places', placeRoutes);
+// 5. Connect to MongoDB Atlas using Mongoose
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Successfully connected to MongoDB Atlas!'))
+  .catch((err) => console.error('MongoDB Atlas Connection Error:', err));
 
-// 4. Start Server
+// 6. Test API Route (Endpoint for frontend verification)
+app.get('/api/test', (req, res) => {
+  res.json({ success: true, message: 'Backend connected successfully!' });
+});
+
+// 7. Define Port and Start the Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   PlaceCardComponent,
@@ -14,12 +14,11 @@ import {
   images,
   natureSpots,
   people,
+  places,
   shops,
   stays,
   timeline,
-  type Place,
 } from '@/app/lib/panhala-data';
-import { PlaceService } from '@/app/services/place.service';
 
 const heroChips = [
   { icon: '📍', label: 'Explore', pos: 'left-[4%] top-[26%]', delay: '0s' },
@@ -34,10 +33,9 @@ const heroChips = [
   imports: [NgClass, RouterLink, PlaceCardComponent, RevealComponent, SectionHeadingComponent],
   templateUrl: './home.html',
 })
-export class HomePage implements OnInit {
-  private readonly placeService = inject(PlaceService);
-
+export class HomePage {
   readonly images = images;
+  readonly places = places;
   readonly exploreFilters = exploreFilters;
   readonly timeline = timeline;
   readonly natureSpots = natureSpots;
@@ -48,18 +46,7 @@ export class HomePage implements OnInit {
   readonly stays = stays;
   readonly shops = shops;
   readonly heroChips = heroChips;
-  nearbyPlaces: Place[] = [];
-
-  ngOnInit(): void {
-    this.placeService.getPlaces().subscribe({
-      next: (places) => {
-        this.nearbyPlaces = places.slice(0, 6);
-      },
-      error: (error) => {
-        console.error('Failed to load places', error);
-      },
-    });
-  }
+  readonly nearbyPlaces = places.slice(0, 6);
 
   initial(name: string): string {
     return name.split(' ')[0]?.[0] ?? '';

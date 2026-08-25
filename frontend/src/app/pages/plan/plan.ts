@@ -1,12 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   PageHeroComponent,
   RevealComponent,
   SectionHeadingComponent,
 } from '@/app/components/site';
-import { images, timeline, type Place } from '@/app/lib/panhala-data';
-import { PlaceService } from '@/app/services/place.service';
+import { images, places, timeline } from '@/app/lib/panhala-data';
 
 const tips = [
   {
@@ -131,22 +130,9 @@ const tips = [
     </main>
   `,
 })
-export class PlanPage implements OnInit {
-  private readonly placeService = inject(PlaceService);
-
+export class PlanPage {
   readonly images = images;
   readonly timeline = timeline;
   readonly tips = tips;
-  shortlist: Place[] = [];
-
-  ngOnInit(): void {
-    this.placeService.getPlaces().subscribe({
-      next: (places) => {
-        this.shortlist = places.slice(0, 6);
-      },
-      error: (error) => {
-        console.error('Failed to load places', error);
-      },
-    });
-  }
+  readonly shortlist = places.slice(0, 6);
 }

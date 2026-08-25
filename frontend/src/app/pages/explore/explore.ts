@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   PageHeroComponent,
@@ -6,9 +6,7 @@ import {
   RevealComponent,
   SectionHeadingComponent,
 } from '@/app/components/site';
-import { images, natureSpots } from '@/app/lib/panhala-data';
-import type { Place } from '@/app/lib/panhala-data';
-import { PlaceService } from '@/app/services/place.service';
+import { images, natureSpots, places } from '@/app/lib/panhala-data';
 
 @Component({
   selector: 'app-explore-page',
@@ -88,21 +86,8 @@ import { PlaceService } from '@/app/services/place.service';
     </main>
   `,
 })
-export class ExplorePage implements OnInit {
-  private readonly placeService = inject(PlaceService);
-
+export class ExplorePage {
   readonly images = images;
+  readonly places = places;
   readonly natureSpots = natureSpots;
-  places: Place[] = [];
-
-  ngOnInit(): void {
-    this.placeService.getPlaces().subscribe({
-      next: (places) => {
-        this.places = places;
-      },
-      error: (error) => {
-        console.error('Failed to load places', error);
-      },
-    });
-  }
 }

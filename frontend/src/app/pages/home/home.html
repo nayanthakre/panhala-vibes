@@ -79,7 +79,7 @@
       </app-section-heading>
     </app-reveal>
     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @for (p of nearbyPlaces; track p.slug; let i = $index) {
+      @for (p of places; track p.slug; let i = $index) {
         <app-reveal [delay]="i * 60">
           <app-place-card [place]="p" />
         </app-reveal>
