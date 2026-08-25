@@ -115,7 +115,11 @@ export const natureSpots = [
     tag: '🌿 Monsoon Trails',
     title: 'Walk through the mist',
     copy: 'Green hills, ancient paths and clouds at eye level.',
-    image: images.natureTrail,
+    images: [
+      '/assets/panhala-fog-1.jpg',
+      '/assets/panhala-fog-2.jpg',
+      '/assets/panhala-fog-3.jpg',
+    ],
   },
   {
     tag: '🌄 Sunset Points',

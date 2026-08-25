@@ -16,9 +16,21 @@
           <a
             href="#"
             [attr.aria-label]="s"
-            class="grid h-10 w-10 place-items-center rounded-xl border border-cream/25 text-xs font-bold transition-colors hover:bg-cream/15"
+            class="grid h-10 w-10 place-items-center rounded-xl border border-cream/25 transition-colors hover:bg-cream/15"
           >
-            {{ s[0] }}
+            @if (s === 'Instagram') {
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
+                <path d="M7.5 2A5.5 5.5 0 0 0 2 7.5v9A5.5 5.5 0 0 0 7.5 22h9a5.5 5.5 0 0 0 5.5-5.5v-9A5.5 5.5 0 0 0 16.5 2h-9Zm0 1.5h9A4 4 0 0 1 20.5 7.5v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Zm4.5 2.25A5.75 5.75 0 1 0 17.75 11.5 5.76 5.76 0 0 0 12 5.75Zm0 1.5a4.25 4.25 0 1 1-4.25 4.25A4.26 4.26 0 0 1 12 7.25Zm5.9-1.95a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1Z"/>
+              </svg>
+            } @else if (s === 'YouTube') {
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
+                <path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.3 5 12 5 12 5s-6.3 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26.6 26.6 0 0 0 2 12a26.6 26.6 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.7 19 12 19 12 19s6.3 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26.6 26.6 0 0 0 22 12a26.6 26.6 0 0 0-.4-4.8ZM9.75 15.02V8.98L15 12l-5.25 3.02Z"/>
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
+                <path d="M4 4h3.3l4.7 6.1L16.9 4H20l-6.8 8 7.1 8H17l-5-6.2L7 20H4l7-8L4 4Z"/>
+              </svg>
+            }
           </a>
         }
       </div>
