@@ -71,7 +71,7 @@ import { images, natureSpots, places } from '@/app/lib/panhala-data';
                     height="900"
                     class="zoom-img h-[280px] w-full object-cover sm:h-[360px]"
                   />
-                  <div class="image-overlay absolute inset-0"></div>
+                  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest-deep/90 via-forest-deep/55 to-transparent"></div>
                   <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
                     <p class="eyebrow text-gold-soft">{{ n.tag }}</p>
                     <h3 class="text-display mt-2 text-2xl text-cream sm:text-3xl">{{ n.title }}</h3>
