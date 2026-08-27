@@ -1,6 +1,6 @@
 <main>
   <!-- HERO -->
-  <section class="relative isolate min-h-[85svh] sm:min-h-[92svh] flex flex-col justify-center overflow-hidden">
+  <section class="relative isolate w-full min-h-[calc(100dvh-4rem)] flex flex-col justify-center overflow-hidden">
     <img
       [src]="images.heroPanhala"
       alt="Panhala Fort ramparts above the misty Sahyadri hills at sunrise"
@@ -506,6 +506,29 @@
           </a>
         </div>
       </app-reveal>
+    </div>
+  </section>
+
+  <!-- TRAVELLER STORIES / REVIEWS -->
+  <section class="container-page py-16 sm:py-24">
+    <app-reveal>
+      <app-section-heading
+        eyebrow="TRAVELLER STORIES"
+        title="Reviews from visitors"
+        subtitle="Real experiences from people who walked the ramparts, ate the misal and stayed the night."
+      >
+        <a routerLink="/reviews" class="btn-base btn-outline shrink-0">
+          Post your review <span class="arrow">→</span>
+        </a>
+      </app-section-heading>
+    </app-reveal>
+
+    <div class="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (r of recentReviews(); track r.id; let i = $index) {
+        <app-reveal [delay]="i * 70">
+          <app-review-card [review]="r" />
+        </app-reveal>
+      }
     </div>
   </section>
 

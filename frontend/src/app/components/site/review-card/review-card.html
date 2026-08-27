@@ -1,0 +1,35 @@
+<article class="surface-card h-full p-6 transition-all duration-300 hover:shadow-lift">
+  <div class="flex items-center gap-3">
+    <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-forest-gradient text-sm font-bold text-cream shadow-sm">
+      {{ initials() }}
+    </span>
+    <div class="min-w-0">
+      <p class="truncate font-semibold text-foreground">{{ review().name }}</p>
+      <p class="truncate text-xs text-muted-foreground">
+        @if (review().location) {
+          <span>{{ review().location }} · </span>
+        }
+        <span>{{ formattedDate() }}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <span [attr.aria-label]="review().rating + ' out of 5'" class="text-sm tracking-[0.15em] text-gold">
+      @for (_ of filledStars(); track $index) {
+        <span>★</span>
+      }
+      <span class="text-muted-foreground/40">
+        @for (_ of emptyStars(); track $index) {
+          <span>★</span>
+        }
+      </span>
+    </span>
+  </div>
+
+  @if (review().title) {
+    <h3 class="text-display mt-3 text-lg font-semibold text-foreground">{{ review().title }}</h3>
+  }
+
+  <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{{ review().message }}</p>
+</article>

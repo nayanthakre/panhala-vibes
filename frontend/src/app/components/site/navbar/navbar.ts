@@ -12,6 +12,7 @@ const links = [
   { label: 'Stay', to: '/stay' },
   { label: 'Local', to: '/local' },
   { label: 'History', to: '/history' },
+  { label: 'Reviews', to: '/reviews' },
   { label: 'Map', to: '/map' },
 ] as const;
 
@@ -33,10 +34,7 @@ export class NavbarComponent implements OnInit {
 
   readonly headerClass = computed(() =>
     cn(
-      'sticky top-0 z-50 transition-all duration-300',
-      this.scrolled()
-        ? 'border-b border-border/70 bg-background/85 shadow-[0_6px_24px_-18px_oklch(0.3_0.03_110_/_0.5)] backdrop-blur-md'
-        : 'bg-transparent',
+      'sticky top-0 z-50 w-full border-b border-border/70 bg-background/95 shadow-[0_4px_20px_-14px_oklch(0.3_0.03_110_/_0.35)] backdrop-blur-md transition-all duration-300',
     ),
   );
 

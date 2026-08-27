@@ -1,13 +1,13 @@
-<section class="relative isolate -mt-[4.5rem] overflow-hidden pt-[4.5rem]">
+<section class="relative isolate w-full min-h-[calc(100dvh-4rem)] flex flex-col justify-center overflow-hidden">
   <img
     [src]="image()"
     [alt]="alt()"
-    width="1600"
-    height="900"
+    width="1920"
+    height="1080"
     class="absolute inset-0 -z-20 h-full w-full object-cover"
   />
   <div class="image-overlay absolute inset-0 -z-10"></div>
-  <div class="container-page relative py-20 sm:py-28">
+  <div class="container-page relative z-10 py-16 sm:py-24 lg:py-28">
     <p class="eyebrow text-xs sm:text-sm text-gold-soft">{{ eyebrow() }}</p>
     <h1 class="text-display mt-3 max-w-3xl text-3xl sm:text-5xl lg:text-6xl text-cream">
       {{ title() }}

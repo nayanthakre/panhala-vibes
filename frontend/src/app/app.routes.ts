@@ -47,6 +47,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/map/map').then((m) => m.MapPage),
       },
       {
+        path: 'reviews',
+        title: 'Panhala Reviews & Stories — Community Experiences',
+        loadComponent: () => import('./pages/reviews/reviews').then((m) => m.ReviewsPage),
+      },
+      {
         path: '**',
         title: 'Page not found — Panhala Vibes',
         loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFoundPage),

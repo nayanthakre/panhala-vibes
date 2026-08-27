@@ -4,3 +4,7 @@ export { PageHeroComponent } from './page-hero/page-hero';
 export { PlaceCardComponent } from './place-card/place-card';
 export { SectionHeadingComponent } from './section-heading/section-heading';
 export { RevealComponent } from './reveal/reveal';
+export { ReviewFormComponent } from './review-form/review-form';
+export { ReviewListComponent } from './review-list/review-list';
+export { ReviewCardComponent } from './review-card/review-card';
+export type { Review } from '@/app/lib/review-data';

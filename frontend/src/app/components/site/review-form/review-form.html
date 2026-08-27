@@ -1,0 +1,93 @@
+<form (submit)="submit($event)" class="surface-card grid gap-4 p-6 sm:p-8 shadow-soft">
+  <div>
+    <h3 class="text-display text-xl text-foreground">Post your review</h3>
+    <p class="mt-1 text-sm text-muted-foreground">
+      Share your Panhala experience — it helps other travellers plan better.
+    </p>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="grid gap-2">
+      <span class="text-sm font-semibold text-foreground">Your name</span>
+      <input
+        required
+        minlength="2"
+        maxlength="60"
+        [value]="name()"
+        (input)="name.set($any($event.target).value)"
+        placeholder="e.g. Aarti Deshmukh"
+        class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-forest"
+      />
+    </label>
+    <label class="grid gap-2">
+      <span class="text-sm font-semibold text-foreground">City (optional)</span>
+      <input
+        maxlength="60"
+        [value]="location()"
+        (input)="location.set($any($event.target).value)"
+        placeholder="e.g. Pune"
+        class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-forest"
+      />
+    </label>
+  </div>
+
+  <div class="grid gap-2">
+    <span class="text-sm font-semibold text-foreground">Your rating</span>
+    <div class="flex items-center gap-1">
+      @for (s of stars; track s) {
+        <button
+          type="button"
+          (click)="setRating(s)"
+          [attr.aria-label]="s + (s > 1 ? ' stars' : ' star')"
+          [attr.aria-pressed]="rating() === s"
+          class="rounded-lg px-1 text-2xl transition-transform hover:scale-110 cursor-pointer"
+          [class.text-gold]="s <= rating()"
+          [class.text-muted-foreground/40]="s > rating()"
+        >
+          ★
+        </button>
+      }
+      <span class="ml-2 text-sm text-muted-foreground">{{ rating() }}/5</span>
+    </div>
+  </div>
+
+  <label class="grid gap-2">
+    <span class="text-sm font-semibold text-foreground">Headline (optional)</span>
+    <input
+      maxlength="90"
+      [value]="title()"
+      (input)="title.set($any($event.target).value)"
+      placeholder="e.g. Monsoon magic at the fort"
+      class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-forest"
+    />
+  </label>
+
+  <label class="grid gap-2">
+    <span class="text-sm font-semibold text-foreground">Your experience</span>
+    <textarea
+      required
+      minlength="5"
+      maxlength="800"
+      rows="5"
+      [value]="message()"
+      (input)="message.set($any($event.target).value)"
+      placeholder="What you saw, ate and loved in Panhala…"
+      class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-forest resize-y"
+    ></textarea>
+  </label>
+
+  @if (status() === 'error') {
+    <p class="text-sm font-semibold text-terracotta">{{ error() }}</p>
+  }
+  @if (status() === 'done') {
+    <p class="text-sm font-semibold text-forest">Thank you! Your review is now live below.</p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="status() === 'saving'"
+    class="btn-base btn-gold w-full cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+  >
+    {{ status() === 'saving' ? 'Posting…' : '✨ Post my review' }}
+  </button>
+</form>

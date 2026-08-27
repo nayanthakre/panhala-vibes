@@ -14,10 +14,10 @@ const columns = [
     ],
   },
   {
-    title: 'Plan',
+    title: 'Plan & Community',
     items: [
       { label: 'Plan Your Visit', to: '/plan' },
-      { label: 'Day Plans', to: '/plan' },
+      { label: 'Traveller Reviews', to: '/reviews' },
       { label: 'Nearby Places', to: '/map' },
     ],
   },
