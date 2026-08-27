@@ -3,7 +3,7 @@ const Review = require('../models/Review');
 // GET /api/reviews - Fetch all reviews
 const getReviews = async (req, res) => {
   try {
-    const { sortBy, order } = req.query;
+    const { sortBy, order, limit } = req.query;
 
     // 1. Set default sorting strategy (newest reviews first)
     let sortOptions = { created_at: -1 };
@@ -17,10 +17,13 @@ const getReviews = async (req, res) => {
       sortOptions = { rating: sortOrder, created_at: -1 };
     }
 
-    // 3. Fetch from MongoDB applying the dynamic sort
+    // Parse limit parameter, default to 100 if not specified
+    const limitVal = limit ? parseInt(limit, 10) : 100;
+
+    // 3. Fetch from MongoDB applying the dynamic sort and limit
     const reviews = await Review.find()
       .sort(sortOptions)
-      .limit(100);
+      .limit(limitVal);
 
     res.json(reviews);
   } catch (error) {
