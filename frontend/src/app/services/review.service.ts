@@ -1,43 +1,38 @@
 import { Injectable, signal } from '@angular/core';
 import { initialReviews, Review } from '@/app/lib/review-data';
 
-const STORAGE_KEY = 'panhala_reviews';
-
 @Injectable({
   providedIn: 'root',
 })
 export class ReviewService {
-  private readonly reviewsSignal = signal<Review[]>(this.loadStoredReviews());
+  private readonly apiUrl = 'http://localhost:5000/api/reviews';
+  private readonly reviewsSignal = signal<Review[]>([]);
   readonly reviews = this.reviewsSignal.asReadonly();
   readonly loading = signal(false);
 
-  private loadStoredReviews(): Review[] {
-    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
-      return initialReviews;
-    }
+  constructor() {
+    this.loadReviews();
+  }
 
+  private async loadReviews(): Promise<void> {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
-        }
+      const res = await fetch(this.apiUrl);
+      if (res.ok) {
+        const data = await res.json();
+        this.reviewsSignal.set(data);
+      } else {
+        this.reviewsSignal.set(initialReviews);
       }
-    } catch {
-      // Fallback if JSON parse fails
+    } catch (error) {
+      console.error('Failed to load reviews from backend, using initial data.', error);
+      this.reviewsSignal.set(initialReviews);
     }
-
-    return initialReviews;
   }
 
   async addReview(newReview: Omit<Review, 'id' | 'created_at'>): Promise<Review> {
     this.loading.set(true);
 
-    // Simulate network latency if desired for smooth feedback
-    await new Promise((resolve) => setTimeout(resolve, 600));
-
-    const review: Review = {
+    const reviewPayload = {
       id: `rev-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
       name: newReview.name.trim(),
       location: newReview.location?.trim() || null,
@@ -47,18 +42,29 @@ export class ReviewService {
       created_at: new Date().toISOString(),
     };
 
-    const updated = [review, ...this.reviewsSignal()];
-    this.reviewsSignal.set(updated);
+    try {
+      const response = await fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reviewPayload),
+      });
 
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch {
-        // Handle storage quota issues gracefully
+      if (!response.ok) {
+        throw new Error('Failed to post review');
       }
-    }
 
-    this.loading.set(false);
-    return review;
+      const savedReview = await response.json();
+
+      const updated = [savedReview, ...this.reviewsSignal()];
+      this.reviewsSignal.set(updated);
+
+      this.loading.set(false);
+      return savedReview;
+    } catch (error) {
+      this.loading.set(false);
+      throw error;
+    }
   }
 }
