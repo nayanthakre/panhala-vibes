@@ -5,7 +5,7 @@ import { initialReviews, Review } from '@/app/lib/review-data';
   providedIn: 'root',
 })
 export class ReviewService {
-  private readonly apiUrl = 'http://localhost:5000/api/reviews';
+  private readonly apiUrl = 'https://panhala-vibes-backend.onrender.com/api/reviews';
   private readonly reviewsSignal = signal<Review[]>([]);
   readonly reviews = this.reviewsSignal.asReadonly();
   readonly loading = signal(false);
