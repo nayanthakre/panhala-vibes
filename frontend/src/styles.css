@@ -151,7 +151,8 @@
   app-section-heading,
   app-page-hero,
   app-navbar,
-  app-footer {
+  app-footer,
+  app-places-map {
     display: block;
     width: 100%;
   }
@@ -382,5 +383,166 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--sand);
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.panhala-marker {
+  background: none;
+  border: none;
+}
+
+.panhala-marker__pin {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--forest);
+  border: 2px solid var(--cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.panhala-marker__pin span {
+  transform: rotate(45deg);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.panhala-marker__pin.is-origin {
+  background: var(--terracotta);
+}
+
+.panhala-marker__pin.is-active {
+  background: var(--gold);
+  transform: rotate(-45deg) scale(1.12);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lift);
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  min-width: 180px;
+}
+
+.leaflet-popup-tip {
+  background: var(--card);
+}
+
+.panhala-popup {
+  padding: 0.85rem 1rem 1rem;
+  max-width: 240px;
+}
+
+.panhala-popup__cat {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.panhala-popup h3 {
+  margin: 0.2rem 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--foreground);
+}
+
+.panhala-popup p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+.panhala-popup__route {
+  margin-top: 0.55rem !important;
+  font-weight: 700;
+  color: var(--forest) !important;
+}
+
+.panhala-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.panhala-popup-actions a {
+  margin-top: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.panhala-go-btn {
+  appearance: none;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.7rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--forest);
+  color: var(--cream);
+}
+
+.panhala-go-btn--ghost {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid color-mix(in oklab, var(--olive) 35%, var(--border));
+}
+
+.panhala-user-marker {
+  background: none;
+  border: none;
+}
+
+.you-are-here {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.you-are-here__dot {
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px;
+  background: #2563eb;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.35);
+}
+
+.you-are-here__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgb(59 130 246 / 0.35);
+  animation: you-are-here-pulse 1.8s ease-out infinite;
+}
+
+@keyframes you-are-here-pulse {
+  0% {
+    transform: scale(0.45);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
   }
 }

@@ -22,7 +22,16 @@ export type Place = {
   distance: string;
   duration: string;
   image: string;
+  lat: number;
+  lng: number;
 };
+
+/** Plateau bus / taxi hub in the fort village — distances on the site are measured from here. */
+export const mapOrigin = {
+  name: 'Panhala Bus Stand',
+  lat: 16.810311,
+  lng: 74.110995,
+} as const;
 
 export const places: Place[] = [
   {
@@ -34,6 +43,8 @@ export const places: Place[] = [
     distance: '2.4 km',
     duration: '1–2 hrs',
     image: images.heroPanhala,
+    lat: 16.808779,
+    lng: 74.107812,
   },
   {
     slug: 'sajja-kothi',
@@ -43,6 +54,8 @@ export const places: Place[] = [
     distance: '800 m',
     duration: '35 min',
     image: images.sajjaKothi,
+    lat: 16.813707,
+    lng: 74.112891,
   },
   {
     slug: 'ambabai-temple',
@@ -53,6 +66,8 @@ export const places: Place[] = [
     distance: '500 m',
     duration: '45 min',
     image: images.ambabaiTemple,
+    lat: 16.81128,
+    lng: 74.10942,
   },
   {
     slug: 'teen-darwaza',
@@ -62,6 +77,8 @@ export const places: Place[] = [
     distance: '1.2 km',
     duration: '30 min',
     image: images.teenDarwaza,
+    lat: 16.80736,
+    lng: 74.106804,
   },
   {
     slug: 'andhar-bavadi',
@@ -72,6 +89,8 @@ export const places: Place[] = [
     distance: '1.6 km',
     duration: '25 min',
     image: images.andharBavadi,
+    lat: 16.80648,
+    lng: 74.10692,
   },
   {
     slug: 'tabak-udyan',
@@ -81,6 +100,8 @@ export const places: Place[] = [
     distance: '1.1 km',
     duration: '40 min',
     image: images.natureTrail,
+    lat: 16.814893,
+    lng: 74.110659,
   },
   {
     slug: 'sunset-point',
@@ -90,6 +111,8 @@ export const places: Place[] = [
     distance: '2.8 km',
     duration: '1 hr',
     image: images.sunsetPoint,
+    lat: 16.811878,
+    lng: 74.098113,
   },
   {
     slug: 'nature-trails',
@@ -100,6 +123,8 @@ export const places: Place[] = [
     distance: '3.2 km',
     duration: '2 hrs',
     image: images.natureTrail,
+    lat: 16.81621,
+    lng: 74.110726,
   },
   {
     slug: 'hidden-places',
@@ -110,6 +135,8 @@ export const places: Place[] = [
     distance: 'varies',
     duration: '1–3 hrs',
     image: images.andharBavadi,
+    lat: 16.808006,
+    lng: 74.11313,
   },
 ];
 
