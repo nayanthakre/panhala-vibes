@@ -604,7 +604,7 @@ export class PlacesMapComponent {
       ${extra}
       <div class="panhala-popup-actions">
         ${action}
-        <a href="/explore#${place.slug}">Explore</a>
+        <a href="/explore/${place.slug}">Explore</a>
       </div>
     </div>`;
   }

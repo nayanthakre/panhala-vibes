@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { afterNextRender, Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   PlaceCardComponent,
@@ -23,10 +23,10 @@ import {
 import { ReviewService } from '@/app/services/review.service';
 
 const heroChips = [
-  { icon: '📍', label: 'Explore', pos: 'left-[4%] top-[26%]', delay: '0s' },
-  { icon: '🏰', label: 'Heritage', pos: 'right-[6%] top-[20%]', delay: '1.4s' },
-  { icon: '🌿', label: 'Nature', pos: 'right-[10%] bottom-[26%]', delay: '2.6s' },
-  { icon: '🍽️', label: 'Local Food', pos: 'left-[7%] bottom-[22%]', delay: '3.8s' },
+  { icon: '📍', label: 'Explore', pos: 'left-[4%] top-[26%]', hideXl: false },
+  { icon: '🏰', label: 'Heritage', pos: 'right-[6%] top-[16%]', hideXl: false },
+  { icon: '🌿', label: 'Nature', pos: 'right-[10%] bottom-[26%]', hideXl: true },
+  { icon: '🍽️', label: 'Local Food', pos: 'left-[7%] bottom-[22%]', hideXl: false },
 ];
 
 @Component({
@@ -44,6 +44,7 @@ const heroChips = [
 })
 export class HomePage {
   private readonly reviewService = inject(ReviewService);
+  private readonly heroVideoEl = viewChild<ElementRef<HTMLVideoElement>>('heroVideo');
 
   readonly images = images;
   readonly places = places;
@@ -59,6 +60,12 @@ export class HomePage {
   readonly heroChips = heroChips;
   readonly nearbyPlaces = places.slice(0, 6);
   readonly recentReviews = computed(() => this.reviewService.reviews().slice(0, 3));
+
+  constructor() {
+    afterNextRender(() => {
+      void this.heroVideoEl()?.nativeElement.play().catch(() => undefined);
+    });
+  }
 
   initial(name: string): string {
     return name.split(' ')[0]?.[0] ?? '';

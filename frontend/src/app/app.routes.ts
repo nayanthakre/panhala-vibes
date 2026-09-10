@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout';
+import { getPlaceBySlug } from './lib/panhala-data';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,15 @@ export const routes: Routes = [
         path: 'explore',
         title: 'Explore Panhala — Fort Places, Trails & Hidden Gems',
         loadComponent: () => import('./pages/explore/explore').then((m) => m.ExplorePage),
+      },
+      {
+        path: 'explore/:slug',
+        title: (route) => {
+          const place = getPlaceBySlug(route.paramMap.get('slug') ?? '');
+          return place ? `${place.name} — Panhala Vibes` : 'Place not found — Panhala Vibes';
+        },
+        loadComponent: () =>
+          import('./pages/explore/place-detail').then((m) => m.PlaceDetailPage),
       },
       {
         path: 'plan',

@@ -3,25 +3,37 @@
   <section class="relative isolate w-full min-h-[calc(100dvh-4rem)] flex flex-col justify-center overflow-hidden">
     <img
       [src]="images.heroPanhala"
-      alt="Panhala Fort ramparts above the misty Sahyadri hills at sunrise"
+      alt=""
       width="1920"
       height="1088"
-      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      class="hero-video-fallback absolute inset-0 -z-20 h-full w-full object-cover"
     />
-    <div class="image-overlay absolute inset-0 -z-10"></div>
+    <video
+      #heroVideo
+      class="hero-video absolute inset-0 -z-20 h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      [muted]="true"
+      preload="auto"
+      [src]="images.heroVideo"
+      [poster]="images.heroPanhala"
+      aria-hidden="true"
+    ></video>
+    <div class="image-overlay absolute inset-0 -z-10 opacity-80"></div>
 
     @for (c of heroChips; track c.label) {
       <div
-        [style.animation-delay]="c.delay"
-        class="float-chip absolute hidden items-center gap-2 rounded-full border border-cream/25 bg-forest-deep/35 px-4 py-2 text-sm font-semibold text-cream backdrop-blur-md lg:flex"
-        [ngClass]="c.pos"
+        class="absolute z-10 hidden items-center gap-2 rounded-full border border-cream/25 bg-forest-deep/35 px-4 py-2 text-sm font-semibold text-cream backdrop-blur-md lg:flex"
+        [ngClass]="[c.pos, c.hideXl ? 'xl:hidden' : '']"
       >
         <span aria-hidden="true">{{ c.icon }}</span>
         {{ c.label }}
       </div>
     }
 
-    <div class="container-page relative flex flex-col justify-center py-20 sm:py-24">
+    <div class="container-page relative z-10 flex flex-col justify-center py-20 pb-32 sm:py-24 sm:pb-28 lg:pb-24">
       <app-reveal class="max-w-3xl">
         <span class="badge-heritage bg-forest-deep/40 text-gold-soft">Kolhapur • Maharashtra</span>
         <h1 class="text-display mt-4 sm:mt-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-cream">
@@ -196,11 +208,10 @@
 
       <div class="mt-8 sm:mt-12 overflow-x-auto pb-4 scrollbar-none">
         <ol class="flex min-w-max gap-4 sm:gap-6 border-t border-cream/20 pt-8">
-          @for (h of history; track h.year; let i = $index) {
+          @for (h of history; track h.year) {
             <li class="relative w-[230px] sm:w-[260px] shrink-0">
               <span
-                class="absolute -top-[2.6rem] left-0 h-3 w-3 rounded-full bg-gold-gradient"
-                [style.animation-delay]="i * 100 + 'ms'"
+                class="heritage-era-dot absolute -top-[2.6rem] left-0 h-3 w-3 rounded-full bg-gold-gradient"
               ></span>
               <p class="text-display text-xl sm:text-2xl text-gold-soft">{{ h.year }}</p>
               <h3 class="text-display mt-2 text-base sm:text-lg text-cream">{{ h.title }}</h3>
@@ -490,14 +501,17 @@
           <h3 class="text-display text-lg sm:text-xl">Nearby places</h3>
           <ul class="mt-4 sm:mt-5 grid gap-2.5 sm:gap-3 flex-1">
             @for (p of nearbyPlaces; track p.slug) {
-              <li
-                class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border px-3.5 py-2.5 sm:px-4 sm:py-3"
-              >
-                <div class="min-w-0">
-                  <p class="truncate font-semibold text-sm sm:text-base">{{ p.name }}</p>
-                  <p class="text-xs text-muted-foreground">{{ p.category }}</p>
-                </div>
-                <span class="shrink-0 text-xs sm:text-sm font-bold text-forest">{{ p.distance }}</span>
+              <li>
+                <a
+                  [routerLink]="['/explore', p.slug]"
+                  class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border px-3.5 py-2.5 sm:px-4 sm:py-3 transition-colors hover:bg-secondary"
+                >
+                  <div class="min-w-0">
+                    <p class="truncate font-semibold text-sm sm:text-base">{{ p.name }}</p>
+                    <p class="text-xs text-muted-foreground">{{ p.category }}</p>
+                  </div>
+                  <span class="shrink-0 text-xs sm:text-sm font-bold text-forest">{{ p.distance }}</span>
+                </a>
               </li>
             }
           </ul>

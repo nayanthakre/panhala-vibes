@@ -113,16 +113,19 @@ const tips = [
         </app-reveal>
         <ul class="mt-8 grid gap-3 sm:grid-cols-2">
           @for (p of shortlist; track p.slug) {
-            <li
-              class="surface-card surface-card-hover grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-5"
-            >
-              <div class="min-w-0">
-                <p class="text-display truncate text-lg">{{ p.name }}</p>
-                <p class="text-sm text-muted-foreground">
-                  {{ p.category }} · ⏱ {{ p.duration }}
-                </p>
-              </div>
-              <span class="shrink-0 text-sm font-bold text-forest">{{ p.distance }}</span>
+            <li>
+              <a
+                [routerLink]="['/explore', p.slug]"
+                class="surface-card surface-card-hover grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-5"
+              >
+                <div class="min-w-0">
+                  <p class="text-display truncate text-lg">{{ p.name }}</p>
+                  <p class="text-sm text-muted-foreground">
+                    {{ p.category }} · ⏱ {{ p.duration }}
+                  </p>
+                </div>
+                <span class="shrink-0 text-sm font-bold text-forest">{{ p.distance }}</span>
+              </a>
             </li>
           }
         </ul>

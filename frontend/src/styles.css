@@ -148,6 +148,7 @@
 
   app-reveal,
   app-place-card,
+  app-place-detail-page,
   app-section-heading,
   app-page-hero,
   app-navbar,
@@ -363,26 +364,17 @@
   }
 }
 
-@utility float-chip {
-  animation: chip-float 7s ease-in-out infinite;
-}
-
-@keyframes chip-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.hero-video-fallback {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  .hero-video {
+    display: none;
+  }
+
+  .hero-video-fallback {
+    display: block;
   }
 }
 

@@ -1,4 +1,8 @@
-<article class="surface-card surface-card-hover group flex h-full flex-col">
+<a
+  [routerLink]="['/explore', place().slug]"
+  class="surface-card surface-card-hover group flex h-full flex-col"
+  [attr.aria-label]="'Explore ' + place().name"
+>
   <div class="relative aspect-[4/3] w-full overflow-hidden bg-muted">
     <img
       [src]="place().image"
@@ -25,13 +29,8 @@
       <span>⏱ {{ place().duration }}</span>
     </div>
 
-    <a
-      routerLink="/explore"
-      [fragment]="place().slug"
-      class="btn-base btn-outline w-full sm:w-auto"
-      [attr.aria-label]="'Explore ' + place().name"
-    >
+    <span class="btn-base btn-outline w-full sm:w-auto">
       Explore <span class="arrow">→</span>
-    </a>
+    </span>
   </div>
-</article>
+</a>
